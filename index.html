@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciador de tarefas</title>
+    <style>
+        
+        body{
+            margin: 0;
+            padding: 0;
+            background-color: #4E0083;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 1000'%3E%3Cg %3E%3Ccircle fill='%234E0083' cx='50' cy='0' r='50'/%3E%3Cg fill='%23540188' %3E%3Ccircle cx='0' cy='50' r='50'/%3E%3Ccircle cx='100' cy='50' r='50'/%3E%3C/g%3E%3Ccircle fill='%2359018e' cx='50' cy='100' r='50'/%3E%3Cg fill='%235f0293' %3E%3Ccircle cx='0' cy='150' r='50'/%3E%3Ccircle cx='100' cy='150' r='50'/%3E%3C/g%3E%3Ccircle fill='%23650298' cx='50' cy='200' r='50'/%3E%3Cg fill='%236b039e' %3E%3Ccircle cx='0' cy='250' r='50'/%3E%3Ccircle cx='100' cy='250' r='50'/%3E%3C/g%3E%3Ccircle fill='%237103a3' cx='50' cy='300' r='50'/%3E%3Cg fill='%237704a8' %3E%3Ccircle cx='0' cy='350' r='50'/%3E%3Ccircle cx='100' cy='350' r='50'/%3E%3C/g%3E%3Ccircle fill='%237d04ad' cx='50' cy='400' r='50'/%3E%3Cg fill='%238304b3' %3E%3Ccircle cx='0' cy='450' r='50'/%3E%3Ccircle cx='100' cy='450' r='50'/%3E%3C/g%3E%3Ccircle fill='%238905b8' cx='50' cy='500' r='50'/%3E%3Cg fill='%239005bd' %3E%3Ccircle cx='0' cy='550' r='50'/%3E%3Ccircle cx='100' cy='550' r='50'/%3E%3C/g%3E%3Ccircle fill='%239605c3' cx='50' cy='600' r='50'/%3E%3Cg fill='%239d05c8' %3E%3Ccircle cx='0' cy='650' r='50'/%3E%3Ccircle cx='100' cy='650' r='50'/%3E%3C/g%3E%3Ccircle fill='%23a305cd' cx='50' cy='700' r='50'/%3E%3Cg fill='%23aa05d2' %3E%3Ccircle cx='0' cy='750' r='50'/%3E%3Ccircle cx='100' cy='750' r='50'/%3E%3C/g%3E%3Ccircle fill='%23b004d7' cx='50' cy='800' r='50'/%3E%3Cg fill='%23b703dd' %3E%3Ccircle cx='0' cy='850' r='50'/%3E%3Ccircle cx='100' cy='850' r='50'/%3E%3C/g%3E%3Ccircle fill='%23be02e2' cx='50' cy='900' r='50'/%3E%3Cg fill='%23c501e7' %3E%3Ccircle cx='0' cy='950' r='50'/%3E%3Ccircle cx='100' cy='950' r='50'/%3E%3C/g%3E%3Ccircle fill='%23CC00EC' cx='50' cy='1000' r='50'/%3E%3C/g%3E%3C/svg%3E");
+            background-attachment: fixed;
+            background-size: contain;
+        }
+        #main{
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+            align-items: center;
+            margin-top: 95px;
+            font-size: 2.1rem;
+        }
+        #main-content{
+            background: white;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            padding: 30px;
+            border-radius: 20px;
+            border-top: black 3px solid;
+            min-width: 600px;
+            max-width: 600px;
+            overflow: auto;           
+        }
+
+        #lista-de-tarefas li {
+        list-style: decimal;
+        font-weight: bold;
+        font-size: 1.2rem;
+        padding: 0 8px;
+        text-align: left;
+        margin-left: 100px;
+        }
+
+        #lista-de-tarefas span{
+            font-weight: normal;
+            padding-right: 60px;
+            
+        }
+
+        hr{
+            background: white;
+            color: black;
+            margin-top: 30px;
+        }
+        .excluir{
+            background: red;
+        }
+        .concluir{
+            background: green;
+            margin-left: 3px;
+            
+        }
+        #adicionar{
+            background: blue;
+            margin-left: 3px;
+        }
+        button{
+            border-radius: 5px;
+            width: 120px;
+            height: 30px;
+            font-weight: bold;
+            color: white;
+            font-size: 10px;
+        }
+        input{
+            margin-left: 10px;
+        }
+        #adicionar-tarefa input{
+            width: 160px;
+            height: 20px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        #data-tarefa{
+            font-size: 1.2rem;
+            display: none;
+
+        }
+        #lista-de-tarefas .concluida span {
+        color: green;
+        text-decoration: line-through;
+        }
+        footer{
+            margin-top: 200px;
+            text-align: center;
+        }
+
+
+    </style>
+
+</head>
+<body>
+    <section id="main">
+        <header>
+            <h1>Gerenciador de Metas</h1>
+        </header>
+        <div id="main-content">
+            <div id="adicionar-tarefa">
+                <span><input type="text" placeholder="nome"><button id="adicionar">adicionar tarefa</button></span>
+            </div>
+            <div id="lista-de-tarefas">
+                <ul>
+                    <li><span>exemplo de meta</span><div><button class="excluir">excluir tarefa</button><button class="concluir">concluir tarefa</button></div></li>
+                    <hr>
+                </ul>
+            </div>
+            <div id="data-tarefa">
+                <span><label for="date">data:</label><input type="date" name="date"></span>      
+            </div>
+        </div>
+    </section>
+    <footer>
+        Versão inicial 1.0.0
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Seletor de botões e campos de entrada
+            const adicionarTarefaBtn = document.getElementById('adicionar');
+            const nomeTarefaInput = document.querySelector('#adicionar-tarefa input');
+            const listaDeTarefas = document.getElementById('lista-de-tarefas');
+
+            // Adiciona uma tarefa à lista
+            function adicionarTarefa() {
+                const nomeTarefa = nomeTarefaInput.value;
+
+                if (nomeTarefa.trim() !== '') {
+                    const novaTarefa = document.createElement('li');
+                    novaTarefa.innerHTML = `<span>${nomeTarefa}</span><div><button class="excluir">excluir tarefa</button><button class="concluir">concluir tarefa</button></div>`;
+                    listaDeTarefas.querySelector('ul').appendChild(novaTarefa);
+                    const hrElement = document.createElement('hr');
+                    listaDeTarefas.querySelector('ul').appendChild(hrElement);
+
+                    // Limpa o campo de entrada
+                    nomeTarefaInput.value = '';
+                }
+            }
+
+            // Exclui uma tarefa
+            function excluirTarefa(event) {
+            const listItem = event.target.closest('li');
+            if (listItem) {
+                // Obtém o próximo elemento irmão (próxima linha <hr>)
+                const hrElement = listItem.nextElementSibling;
+
+                // Remove a tarefa e a linha <hr> associada
+                listItem.remove();
+                
+                if (hrElement && hrElement.tagName.toLowerCase() === 'hr') {
+                    hrElement.remove();
+                }
+            }
+        }
+
+            // Conclui uma tarefa (apenas exemplo visual)
+            function concluirTarefa(event) {
+                const listItem = event.target.closest('li');
+                if (listItem) {
+                    listItem.classList.toggle('concluida');
+                }
+            }
+
+            // Adiciona manipuladores de eventos aos botões
+            adicionarTarefaBtn.addEventListener('click', adicionarTarefa);
+            listaDeTarefas.addEventListener('click', function (event) {
+                if (event.target.classList.contains('excluir')) {
+                    excluirTarefa(event);
+                } else if (event.target.classList.contains('concluir')) {
+                    concluirTarefa(event);
+                }
+            });
+        });
+    </script>
+    
+</body>
+</html>
