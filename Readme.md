@@ -1,0 +1,1 @@
+Gerenciador de Metas criado para um curso meu, usando html,css e  javascript. Ainda faltam alguns detalhes como salvar as tarefas e etc
